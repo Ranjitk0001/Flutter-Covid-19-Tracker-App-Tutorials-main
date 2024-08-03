@@ -1,13 +1,13 @@
+// Remove any plugin application statements
+
 buildscript {
-    ext.kotlin_version = '1.3.50'
     repositories {
         google()
         mavenCentral()
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:7.4.0' // Ensure this version is correct
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0" // Ensure this version is correct
     }
 }
 
@@ -18,12 +18,13 @@ allprojects {
     }
 }
 
+
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
     project.evaluationDependsOn(':app')
 }
 
-task clean(type: Delete) {
+tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
